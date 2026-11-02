@@ -19,12 +19,12 @@ if [ -z "$URL" ]; then
 fi
 
 echo
-echo "== Checking https://$URL =="
-CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://$URL")
+echo "== Checking $URL =="
+CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
 
 if [ "$CODE" = "200" ]; then
-  echo "✓ Live and responding 200: https://$URL"
+  echo "✓ Live and responding 200: $URL"
 else
-  echo "✗ Got HTTP $CODE from https://$URL — open it and check before walking in."
+  echo "✗ Got HTTP $CODE from $URL — open it and check before walking in."
   exit 1
 fi
