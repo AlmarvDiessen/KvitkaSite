@@ -1,0 +1,37 @@
+# Kvitka Centrum website
+
+## Project overview
+
+A website for **Kvitka Centrum**, a beauty salon (lashes, massage, keratin treatments, haircuts, nails, waxing) in Enschede, Netherlands. Started as a generic single-page "barbershop pitch" template and was rebranded into a real site for this client.
+
+- **Stack**: Next.js (App Router) + TypeScript + Tailwind CSS, no database/auth.
+- **Live site**: https://kvitka-centrum-salon-aldb.vercel.app
+- **GitHub**: https://github.com/AlmarvDiessen/KvitkaSite
+- **Vercel project**: `kvitka-centrum-salon` (Vercel team: `aldb`)
+- **Run/deploy/edit instructions**: see `README.md` — this file is status and history, not a how-to.
+
+## Current status
+
+**Live and working:**
+- Full rebrand to Kvitka Centrum — real services, Ukrainian-flag-inspired blue/yellow/white theme, flower-mark logo (cropped from the shop's own signage) used as both the header/footer logo and favicon.
+- Real salon photos in the gallery (lashes, keratin, haircut, nails, storefront), plus a faint sunflower-painting background on the hero section.
+- Confirmed-real address and opening hours (from the client's own Google Business listing screenshot).
+- Booking form (`app/api/book/route.ts`) that creates a Google Calendar event on submit, via a service account — code is live, but **not yet connected to a real calendar** (see TODOs).
+- Repo pushed to GitHub for collaboration.
+
+**Open TODOs:**
+- **Google Calendar not configured** — booking form currently just logs and shows "please call us instead." Needs `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_CALENDAR_ID` env vars (locally in `.env.local` and in Vercel's project settings). Full one-time setup steps are in `README.md` under "Booking form."
+- **Phone number and service prices** are still placeholders (`[PHONE — confirm with Kvitka Centrum]`, `"TBD"` in `app/content.ts`) — nothing was fabricated for a real business; needs confirming with the client directly.
+- **Old domain still live**: `harvest-hub-delta-nine.vercel.app` (leftover from before the project was renamed) still resolves alongside the real `kvitka-centrum-salon-aldb.vercel.app` URL. Removing it needs a Vercel API call with a destructive-confirmation flag that got blocked by the assistant environment's permission classifier — do it from the Vercel dashboard (Project → Settings → Domains → remove) or re-run: `npx vercel api /v9/projects/kvitka-centrum-salon/domains/harvest-hub-delta-nine.vercel.app --method DELETE --dangerously-skip-permissions` from a normal terminal.
+- **`REVIEWS` is empty** (`app/content.ts`) — intentionally left blank rather than inventing quotes; add real ones when available.
+
+## History log
+
+> When you finish a meaningful piece of work on this project, add a new dated entry below (bottom of the list = most recent). Keep entries short: what changed, and the "why" if it's not obvious from the commit message alone.
+
+- **2026-11-02** — Template bootstrapped (`fcc3fac`, `543e568`). Generic single-page barbershop landing-page template built (fictional "Fade & Co.", London), with a `deploy.sh` script (build + `vercel --prod` + health check). Fixed a doubled `https://` bug in that script's URL check.
+- **2026-11-03** — Rebranded to Kvitka Centrum (`aad8ef6`). Swapped the fictional UK barbershop content for the real Enschede beauty salon — services now span lashes, massage, keratin, haircut, nails, and waxing instead of haircuts only. Added the booking form + `/api/book` route (originally emailing via Resend). Address/phone/prices were left as explicit placeholders: an early web search for them turned up data that, when checked against its source, didn't actually match — publishing a wrong address/phone for a real business was judged worse than a clearly-marked placeholder.
+- **2026-11-03** — Real photos + confirmed details (`c24d3c2`). Client supplied real salon photos (lashes, keratin, haircut, nails, storefront) and a screenshot of their Google Business listing, which confirmed the real address and opening hours matched what the earlier (more careful) web research had found — phone and prices still unconfirmed.
+- **2026-11-03** — Ukrainian redesign (`df9898c`). Fixed a gallery image-stretch bug: grid images were missing `w-full h-full`, so on desktop they rendered at their native (small, Instagram-save-sized) resolution instead of filling their tile — mobile only looked right by coincidence. Re-themed from amber/zinc-900 to a blue/yellow/white palette per the client's request. Added the sunflower painting as a faint, obscured hero background. Replaced the generic sparkle icon ("3 orange stars") with a flower mark cropped out of the shop's own sign photo and recolored to match the theme — used as both the header/footer logo and the site favicon.
+- **2026-11-03** — GitHub + Google Calendar (`def25a9`). Repo pushed to GitHub (`AlmarvDiessen/KvitkaSite`) so collaborators can work on it. Switched booking notifications from Resend email to writing events directly onto a Google Calendar via a service account — client preferred this since they already use Google and it means bookings land straight on a calendar instead of in an inbox.
+- **2026-11-03** — This file added. No prior CLAUDE.md/docs/changelog existed; added so any collaborator or Claude Code session opening this repo gets full context and status automatically, instead of re-deriving it from git history each time.
