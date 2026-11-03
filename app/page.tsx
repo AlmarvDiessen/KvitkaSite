@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Scissors, Phone, MapPin, Clock, Menu, X, Star } from "lucide-react";
+import { Sparkles, Phone, MapPin, Clock, Menu, X, Star } from "lucide-react";
 import {
   SHOP_NAME,
   TAGLINE,
@@ -19,12 +19,52 @@ import {
 const NAV_LINKS = [
   { href: "#services", label: "Services" },
   { href: "#gallery", label: "Gallery" },
+  { href: "#booking", label: "Book Now" },
   { href: "#hours", label: "Hours & Location" },
   { href: "#contact", label: "Contact" },
 ];
 
+type BookingStatus = "idle" | "submitting" | "success" | "error";
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [bookingStatus, setBookingStatus] = useState<BookingStatus>("idle");
+  const [bookingError, setBookingError] = useState<string | null>(null);
+
+  async function handleBookingSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    setBookingStatus("submitting");
+    setBookingError(null);
+
+    try {
+      const res = await fetch("/api/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          contact: data.get("contact"),
+          service: data.get("service"),
+          date: data.get("date"),
+          time: data.get("time"),
+          notes: data.get("notes"),
+        }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error ?? "Something went wrong. Please call us instead.");
+      }
+
+      setBookingStatus("success");
+      form.reset();
+    } catch (err) {
+      setBookingStatus("error");
+      setBookingError(err instanceof Error ? err.message : "Something went wrong.");
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white text-zinc-900">
@@ -32,7 +72,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-zinc-200">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2 font-semibold text-lg tracking-tight">
-            <Scissors className="h-5 w-5 text-amber-600" />
+            <Sparkles className="h-5 w-5 text-amber-600" />
             {SHOP_NAME}
           </a>
 
@@ -94,11 +134,10 @@ export default function Home() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href={PHONE_TEL}
+            href="#booking"
             className="inline-flex items-center gap-2 bg-zinc-900 text-white font-medium px-6 py-3 rounded-full hover:bg-amber-600 transition-colors"
           >
-            <Phone className="h-4 w-4" />
-            Call to Book
+            Book Now
           </a>
           <a
             href="#services"
@@ -140,41 +179,125 @@ export default function Home() {
           <p className="text-zinc-500">A look at the work.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {GALLERY_ITEMS.map((label, i) => (
-            <div
-              key={label}
-              className={`aspect-square rounded-2xl flex flex-col items-center justify-center gap-3 ${
-                i % 2 === 0 ? "bg-zinc-100" : "bg-zinc-900"
-              }`}
-            >
-              <Scissors
-                className={`h-8 w-8 ${i % 2 === 0 ? "text-amber-600" : "text-amber-500"}`}
+          {GALLERY_ITEMS.map((item, i) =>
+            item.src ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={item.alt}
+                src={item.src}
+                alt={item.alt}
+                className="aspect-square rounded-2xl object-cover"
               />
-              <span
-                className={`text-sm font-medium ${i % 2 === 0 ? "text-zinc-600" : "text-zinc-300"}`}
+            ) : (
+              <div
+                key={item.alt}
+                className={`aspect-square rounded-2xl flex flex-col items-center justify-center gap-3 ${
+                  i % 2 === 0 ? "bg-zinc-100" : "bg-zinc-900"
+                }`}
               >
-                {label}
-              </span>
-            </div>
-          ))}
+                <Sparkles
+                  className={`h-8 w-8 ${i % 2 === 0 ? "text-amber-600" : "text-amber-500"}`}
+                />
+                <span
+                  className={`text-sm font-medium ${i % 2 === 0 ? "text-zinc-600" : "text-zinc-300"}`}
+                >
+                  {item.alt}
+                </span>
+              </div>
+            )
+          )}
         </div>
       </section>
 
       {/* Reviews */}
-      <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-100">
-        <div className="flex flex-col md:flex-row gap-8 justify-center text-center md:text-left">
-          {REVIEWS.map((review) => (
-            <div key={review.quote} className="flex-1 max-w-sm mx-auto md:mx-0">
-              <div className="flex gap-1 mb-3 justify-center md:justify-start">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500" />
-                ))}
+      {REVIEWS.length > 0 && (
+        <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-100">
+          <div className="flex flex-col md:flex-row gap-8 justify-center text-center md:text-left">
+            {REVIEWS.map((review) => (
+              <div key={review.quote} className="flex-1 max-w-sm mx-auto md:mx-0">
+                <div className="flex gap-1 mb-3 justify-center md:justify-start">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500" />
+                  ))}
+                </div>
+                <p className="text-zinc-600 mb-2">&ldquo;{review.quote}&rdquo;</p>
+                <p className="text-sm text-zinc-400">{review.name}</p>
               </div>
-              <p className="text-zinc-600 mb-2">&ldquo;{review.quote}&rdquo;</p>
-              <p className="text-sm text-zinc-400">{review.name}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Booking */}
+      <section id="booking" className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-100">
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl font-semibold tracking-tight mb-3">Book an Appointment</h2>
+          <p className="text-zinc-500">Pick a service and a time that works for you.</p>
         </div>
+        <form onSubmit={handleBookingSubmit} className="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input
+            name="name"
+            required
+            placeholder="Your name"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+          />
+          <input
+            name="contact"
+            required
+            placeholder="Phone or email"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+          />
+          <select
+            name="service"
+            required
+            defaultValue=""
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+          >
+            <option value="" disabled>
+              Select a service
+            </option>
+            {SERVICES.map((service) => (
+              <option key={service.name} value={service.name}>
+                {service.name}
+              </option>
+            ))}
+          </select>
+          <input
+            type="date"
+            name="date"
+            required
+            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+          />
+          <input
+            type="time"
+            name="time"
+            required
+            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+          />
+          <textarea
+            name="notes"
+            placeholder="Anything else we should know? (optional)"
+            rows={3}
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+          />
+
+          <button
+            type="submit"
+            disabled={bookingStatus === "submitting"}
+            className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-zinc-900 text-white font-medium px-6 py-3 rounded-full hover:bg-amber-600 transition-colors disabled:opacity-50"
+          >
+            {bookingStatus === "submitting" ? "Sending…" : "Request Booking"}
+          </button>
+
+          {bookingStatus === "success" && (
+            <p className="sm:col-span-2 text-sm text-emerald-600">
+              Thanks! We&apos;ve received your request and will confirm shortly.
+            </p>
+          )}
+          {bookingStatus === "error" && (
+            <p className="sm:col-span-2 text-sm text-red-600">{bookingError}</p>
+          )}
+        </form>
       </section>
 
       {/* Hours & Location */}
@@ -225,7 +348,7 @@ export default function Home() {
       <footer className="border-t border-zinc-100">
         <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
           <div className="flex items-center gap-2 font-medium text-zinc-900">
-            <Scissors className="h-4 w-4 text-amber-600" />
+            <Sparkles className="h-4 w-4 text-amber-600" />
             {SHOP_NAME}
           </div>
           <p>&copy; {new Date().getFullYear()} {SHOP_NAME}. All rights reserved.</p>

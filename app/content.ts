@@ -1,53 +1,45 @@
 // Everything shop-specific lives here. Starting a new pitch? Edit this file only.
+//
+// ADDRESS / PHONE_DISPLAY / PHONE_TEL / HOURS / SERVICES prices below are
+// placeholders — confirm the real details with Kvitka Centrum directly before
+// going live. (A web search for these turned up mismatched/unverifiable data
+// for a similarly-named salon, so nothing unverified was hardcoded here.)
 
-export const SHOP_NAME = "Fade & Co.";
-export const TAGLINE = "Classic cuts, modern style.";
-export const HERO_EYEBROW = "Walk-ins welcome";
-export const HERO_DESCRIPTION = `${SHOP_NAME} is your neighbourhood barbershop for sharp fades, clean beard work, and a proper hot towel shave — no appointment required.`;
+export const SHOP_NAME = "Kvitka Centrum";
+export const TAGLINE = "Beauty, your way.";
+export const HERO_EYEBROW = "Book your appointment online";
+export const HERO_DESCRIPTION = `${SHOP_NAME} is your neighbourhood beauty salon in Enschede — lashes, massage, keratin treatments, haircuts, nails, and waxing, all in one place.`;
 
-export const PHONE_DISPLAY = "020 7946 0958";
-export const PHONE_TEL = "tel:+442079460958";
-export const ADDRESS = "14 Market Street, London, N1 2AB";
+export const PHONE_DISPLAY = "[PHONE — confirm with Kvitka Centrum]";
+export const PHONE_TEL = "tel:+310000000000";
+export const ADDRESS = "[ADDRESS — confirm with Kvitka Centrum, Enschede]";
 
 export const SERVICES = [
-  { name: "Classic Haircut", price: "£20", duration: "30 min" },
-  { name: "Skin Fade", price: "£25", duration: "40 min" },
-  { name: "Beard Trim", price: "£12", duration: "20 min" },
-  { name: "Hot Towel Shave", price: "£18", duration: "30 min" },
-  { name: "Cut & Beard Combo", price: "£30", duration: "50 min" },
-  { name: "Kids Cut (Under 12)", price: "£15", duration: "25 min" },
+  { name: "Lash Extensions", price: "TBD", duration: "TBD" },
+  { name: "Relaxation Massage", price: "TBD", duration: "TBD" },
+  { name: "Keratin Treatment", price: "TBD", duration: "TBD" },
+  { name: "Haircut & Style", price: "TBD", duration: "TBD" },
+  { name: "Manicure / Pedicure", price: "TBD", duration: "TBD" },
+  { name: "Waxing", price: "TBD", duration: "TBD" },
 ];
 
-export const GALLERY_ITEMS = [
-  "Skin Fade",
-  "Classic Crop",
-  "Beard Sculpt",
-  "Hot Towel Shave",
-  "Textured Crop",
-  "Full Grooming",
+export const GALLERY_ITEMS: { src: string | null; alt: string }[] = [
+  { src: null, alt: "Lash Extensions" },
+  { src: null, alt: "Relaxation Massage" },
+  { src: null, alt: "Keratin Treatment" },
+  { src: null, alt: "Haircut & Style" },
+  { src: null, alt: "Manicure / Pedicure" },
+  { src: null, alt: "Waxing" },
 ];
 
 export const HOURS = [
-  { day: "Monday", time: "9:00 – 18:00" },
-  { day: "Tuesday", time: "9:00 – 18:00" },
-  { day: "Wednesday", time: "9:00 – 18:00" },
-  { day: "Thursday", time: "9:00 – 20:00" },
-  { day: "Friday", time: "9:00 – 20:00" },
-  { day: "Saturday", time: "8:00 – 17:00" },
-  { day: "Sunday", time: "Closed" },
+  { day: "Monday", time: "[TBD]" },
+  { day: "Tuesday", time: "[TBD]" },
+  { day: "Wednesday", time: "[TBD]" },
+  { day: "Thursday", time: "[TBD]" },
+  { day: "Friday", time: "[TBD]" },
+  { day: "Saturday", time: "[TBD]" },
+  { day: "Sunday", time: "[TBD]" },
 ];
 
-export const REVIEWS = [
-  {
-    quote: "Best fade I've had in years. Clean shop, friendly team.",
-    name: "Local customer",
-  },
-  {
-    quote: "Walked in on a Saturday, no wait, great haircut.",
-    name: "Local customer",
-  },
-  {
-    quote: "The hot towel shave is worth it on its own.",
-    name: "Local customer",
-  },
-];
+export const REVIEWS: { quote: string; name: string }[] = [];
