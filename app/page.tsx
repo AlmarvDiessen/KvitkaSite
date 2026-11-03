@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, Phone, MapPin, Clock, Menu, X, Star } from "lucide-react";
+import { Phone, MapPin, Clock, Menu, X, Star, Sparkles } from "lucide-react";
 import {
   SHOP_NAME,
   TAGLINE,
@@ -72,7 +72,8 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-zinc-200">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2 font-semibold text-lg tracking-tight">
-            <Sparkles className="h-5 w-5 text-amber-600" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/flower-mark.png" alt="" className="h-7 w-7 shrink-0" />
             {SHOP_NAME}
           </a>
 
@@ -86,7 +87,7 @@ export default function Home() {
 
           <a
             href={PHONE_TEL}
-            className="hidden md:inline-flex items-center gap-2 bg-zinc-900 text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-amber-600 transition-colors"
+            className="hidden md:inline-flex items-center gap-2 bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-blue-800 transition-colors"
           >
             <Phone className="h-4 w-4" />
             {PHONE_DISPLAY}
@@ -122,29 +123,39 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-6 py-24 md:py-36 text-center">
-        <p className="text-amber-600 font-medium tracking-wide uppercase text-sm mb-4">
-          {HERO_EYEBROW}
-        </p>
-        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-zinc-900 mb-6">
-          {TAGLINE}
-        </h1>
-        <p className="text-lg text-zinc-500 max-w-xl mx-auto mb-10">
-          {HERO_DESCRIPTION}
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#booking"
-            className="inline-flex items-center gap-2 bg-zinc-900 text-white font-medium px-6 py-3 rounded-full hover:bg-amber-600 transition-colors"
-          >
-            Book Now
-          </a>
-          <a
-            href="#services"
-            className="inline-flex items-center gap-2 border border-zinc-300 text-zinc-700 font-medium px-6 py-3 rounded-full hover:border-zinc-900 transition-colors"
-          >
-            View Services
-          </a>
+      <section className="relative overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/hero-painting.webp"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-top opacity-10 pointer-events-none select-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/80 to-white pointer-events-none" />
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 md:py-36 text-center">
+          <p className="text-yellow-600 font-medium tracking-wide uppercase text-sm mb-4">
+            {HERO_EYEBROW}
+          </p>
+          <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-zinc-900 mb-6">
+            {TAGLINE}
+          </h1>
+          <p className="text-lg text-zinc-500 max-w-xl mx-auto mb-10">
+            {HERO_DESCRIPTION}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="#booking"
+              className="inline-flex items-center gap-2 bg-white text-blue-700 font-medium px-6 py-3 rounded-full border-2 border-blue-700 hover:bg-yellow-400 hover:text-zinc-900 hover:border-yellow-400 transition-colors"
+            >
+              Book Now
+            </a>
+            <a
+              href="#services"
+              className="inline-flex items-center gap-2 border border-blue-200 text-blue-700 font-medium px-6 py-3 rounded-full hover:border-blue-700 hover:bg-blue-50 transition-colors"
+            >
+              View Services
+            </a>
+          </div>
         </div>
       </section>
 
@@ -158,11 +169,11 @@ export default function Home() {
           {SERVICES.map((service) => (
             <div
               key={service.name}
-              className="border border-zinc-200 rounded-2xl p-6 hover:border-amber-600 transition-colors"
+              className="border border-zinc-200 rounded-2xl p-6 hover:border-blue-600 transition-colors"
             >
               <div className="flex items-start justify-between mb-2">
                 <h3 className="font-semibold text-zinc-900">{service.name}</h3>
-                <span className="font-semibold text-amber-600 whitespace-nowrap ml-4">
+                <span className="font-semibold text-blue-700 whitespace-nowrap ml-4">
                   {service.price}
                 </span>
               </div>
@@ -186,20 +197,20 @@ export default function Home() {
                 key={item.alt}
                 src={item.src}
                 alt={item.alt}
-                className="aspect-square rounded-2xl object-cover"
+                className="w-full h-full aspect-square rounded-2xl object-cover"
               />
             ) : (
               <div
                 key={item.alt}
                 className={`aspect-square rounded-2xl flex flex-col items-center justify-center gap-3 ${
-                  i % 2 === 0 ? "bg-zinc-100" : "bg-zinc-900"
+                  i % 2 === 0 ? "bg-blue-50" : "bg-blue-700"
                 }`}
               >
                 <Sparkles
-                  className={`h-8 w-8 ${i % 2 === 0 ? "text-amber-600" : "text-amber-500"}`}
+                  className={`h-8 w-8 ${i % 2 === 0 ? "text-blue-700" : "text-yellow-400"}`}
                 />
                 <span
-                  className={`text-sm font-medium ${i % 2 === 0 ? "text-zinc-600" : "text-zinc-300"}`}
+                  className={`text-sm font-medium ${i % 2 === 0 ? "text-blue-700" : "text-blue-100"}`}
                 >
                   {item.alt}
                 </span>
@@ -217,7 +228,7 @@ export default function Home() {
               <div key={review.quote} className="flex-1 max-w-sm mx-auto md:mx-0">
                 <div className="flex gap-1 mb-3 justify-center md:justify-start">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500" />
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p className="text-zinc-600 mb-2">&ldquo;{review.quote}&rdquo;</p>
@@ -239,19 +250,19 @@ export default function Home() {
             name="name"
             required
             placeholder="Your name"
-            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
           />
           <input
             name="contact"
             required
             placeholder="Phone or email"
-            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
           />
           <select
             name="service"
             required
             defaultValue=""
-            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
           >
             <option value="" disabled>
               Select a service
@@ -266,25 +277,25 @@ export default function Home() {
             type="date"
             name="date"
             required
-            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
           />
           <input
             type="time"
             name="time"
             required
-            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
           />
           <textarea
             name="notes"
             placeholder="Anything else we should know? (optional)"
             rows={3}
-            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-600"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
           />
 
           <button
             type="submit"
             disabled={bookingStatus === "submitting"}
-            className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-zinc-900 text-white font-medium px-6 py-3 rounded-full hover:bg-amber-600 transition-colors disabled:opacity-50"
+            className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-white text-blue-700 font-medium px-6 py-3 rounded-full border-2 border-blue-700 hover:bg-yellow-400 hover:text-zinc-900 hover:border-yellow-400 transition-colors disabled:opacity-50"
           >
             {bookingStatus === "submitting" ? "Sending…" : "Request Booking"}
           </button>
@@ -305,7 +316,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight mb-6 flex items-center gap-3">
-              <Clock className="h-6 w-6 text-amber-600" />
+              <Clock className="h-6 w-6 text-blue-700" />
               Opening Hours
             </h2>
             <ul className="divide-y divide-zinc-100">
@@ -320,7 +331,7 @@ export default function Home() {
 
           <div id="contact">
             <h2 className="text-3xl font-semibold tracking-tight mb-6 flex items-center gap-3">
-              <MapPin className="h-6 w-6 text-amber-600" />
+              <MapPin className="h-6 w-6 text-blue-700" />
               Find Us
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -341,7 +352,7 @@ export default function Home() {
             <p className="text-zinc-600 mb-4">{ADDRESS}</p>
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center gap-2 bg-zinc-900 text-white font-medium px-6 py-3 rounded-full hover:bg-amber-600 transition-colors"
+              className="inline-flex items-center gap-2 bg-blue-700 text-white font-medium px-6 py-3 rounded-full hover:bg-blue-800 transition-colors"
             >
               <Phone className="h-4 w-4" />
               {PHONE_DISPLAY}
@@ -354,7 +365,8 @@ export default function Home() {
       <footer className="border-t border-zinc-100">
         <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
           <div className="flex items-center gap-2 font-medium text-zinc-900">
-            <Sparkles className="h-4 w-4 text-amber-600" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/flower-mark.png" alt="" className="h-6 w-6 shrink-0" />
             {SHOP_NAME}
           </div>
           <p>&copy; {new Date().getFullYear()} {SHOP_NAME}. All rights reserved.</p>
