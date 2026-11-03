@@ -6,7 +6,7 @@ A single-page Next.js landing page for pitching small local businesses (barbersh
 
 Everything shop-specific (name, tagline, phone, address, services/prices, gallery images, hours, reviews) lives in `app/content.ts`. Edit that one file.
 
-The accent color (currently amber) is set via Tailwind class names directly in `app/page.tsx` — Tailwind can't resolve dynamically-interpolated class names at build time, so it isn't in `content.ts`. To re-theme, find-replace `amber` in `app/page.tsx` for another Tailwind color.
+The accent colors (currently blue/yellow, a Ukrainian-flag theme) are set via Tailwind class names directly in `app/page.tsx` — Tailwind can't resolve dynamically-interpolated class names at build time, so they aren't in `content.ts`. To re-theme, find-replace the `blue-*`/`yellow-*` classes in `app/page.tsx` for other Tailwind colors.
 
 ### Gallery images
 
@@ -14,12 +14,20 @@ Drop image files into `public/gallery/` and set the matching `src` (e.g. `"/gall
 
 ## Booking form
 
-The "Book Now" section posts to `app/api/book/route.ts`, which emails the booking to the shop via [Resend](https://resend.com). Copy `.env.example` to `.env.local` and fill in:
+The "Book Now" section posts to `app/api/book/route.ts`, which creates an event directly on the shop's Google Calendar (via a service account, so no interactive login is needed). Copy `.env.example` to `.env.local` and fill in:
 
-- `RESEND_API_KEY` — from your Resend account
-- `BOOKING_NOTIFICATION_EMAIL` — the address that should receive booking requests
+- `GOOGLE_SERVICE_ACCOUNT_EMAIL` / `GOOGLE_PRIVATE_KEY` — from a Google Cloud service account JSON key
+- `GOOGLE_CALENDAR_ID` — the calendar to write events to (the shop's Google account email for their primary calendar, or a specific calendar's ID from its settings page)
 
-Without these set, the form still works but bookings are only logged server-side (no email sent), and the visitor sees a "call us instead" message.
+Without these set, the form still works but bookings are only logged server-side (no calendar event created), and the visitor sees a "call us instead" message.
+
+### One-time Google Calendar setup
+
+1. In [Google Cloud Console](https://console.cloud.google.com/), create a project (or reuse one) and enable the **Google Calendar API**.
+2. Create a **Service Account** (IAM & Admin → Service Accounts), then create a JSON key for it and download it.
+3. From that JSON file: `client_email` → `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `private_key` → `GOOGLE_PRIVATE_KEY` (keep the `\n` line breaks as-is, the app un-escapes them).
+4. On the Google account whose calendar should receive bookings, open Google Calendar → Settings → pick the calendar → **Share with specific people** → add the service account's email with **"Make changes to events"** permission.
+5. `GOOGLE_CALENDAR_ID` is that calendar's address, found under Settings → "Integrate calendar" (for a primary calendar, it's just the Google account's email address).
 
 ## Local development
 

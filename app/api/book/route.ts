@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-import { SHOP_NAME } from "../../content";
+import { JWT } from "google-auth-library";
+
+const CALENDAR_SCOPES = ["https://www.googleapis.com/auth/calendar.events"];
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
@@ -21,11 +22,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Please fill in all required fields." }, { status: 400 });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const notificationEmail = process.env.BOOKING_NOTIFICATION_EMAIL;
+  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  const calendarId = process.env.GOOGLE_CALENDAR_ID;
 
-  if (!apiKey || !notificationEmail) {
-    console.error("Booking received but RESEND_API_KEY / BOOKING_NOTIFICATION_EMAIL not configured:", {
+  if (!clientEmail || !privateKey || !calendarId) {
+    console.error("Booking received but Google Calendar isn't configured:", {
       name,
       contact,
       service,
@@ -34,32 +36,53 @@ export async function POST(req: NextRequest) {
       notes,
     });
     return NextResponse.json(
-      { error: "Booking isn't wired up to email yet. Please call us instead." },
+      { error: "Booking isn't wired up to the calendar yet. Please call us instead." },
       { status: 503 }
     );
   }
 
-  const resend = new Resend(apiKey);
+  const start = new Date(`${date}T${time}:00`);
+  if (Number.isNaN(start.getTime())) {
+    return NextResponse.json({ error: "Invalid date or time." }, { status: 400 });
+  }
+  const end = new Date(start.getTime() + 60 * 60 * 1000); // default 1hr slot — service durations aren't set yet
 
-  const { error } = await resend.emails.send({
-    from: `${SHOP_NAME} Bookings <onboarding@resend.dev>`,
-    to: notificationEmail,
-    subject: `New booking request: ${service} for ${name}`,
-    text: [
-      `Name: ${name}`,
-      `Contact: ${contact}`,
-      `Service: ${service}`,
-      `Date: ${date}`,
-      `Time: ${time}`,
-      notes ? `Notes: ${notes}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n"),
-  });
+  try {
+    const jwtClient = new JWT({ email: clientEmail, key: privateKey, scopes: CALENDAR_SCOPES });
+    const { token } = await jwtClient.getAccessToken();
 
-  if (error) {
-    console.error("Resend error:", error);
-    return NextResponse.json({ error: "Failed to send booking. Please call us instead." }, { status: 502 });
+    const res = await fetch(
+      `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          summary: `${service} — ${name}`,
+          description: [`Contact: ${contact}`, notes ? `Notes: ${notes}` : null]
+            .filter(Boolean)
+            .join("\n"),
+          start: { dateTime: start.toISOString() },
+          end: { dateTime: end.toISOString() },
+        }),
+      }
+    );
+
+    if (!res.ok) {
+      console.error("Google Calendar error:", await res.text());
+      return NextResponse.json(
+        { error: "Failed to add booking to the calendar. Please call us instead." },
+        { status: 502 }
+      );
+    }
+  } catch (err) {
+    console.error("Google Calendar request failed:", err);
+    return NextResponse.json(
+      { error: "Failed to add booking to the calendar. Please call us instead." },
+      { status: 502 }
+    );
   }
 
   return NextResponse.json({ ok: true });
