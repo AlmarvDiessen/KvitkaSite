@@ -323,6 +323,12 @@ export default function Home() {
               <MapPin className="h-6 w-6 text-amber-600" />
               Find Us
             </h2>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/gallery/storefront.jpg"
+              alt="Kvitka Centrum storefront"
+              className="rounded-2xl mb-4 w-full aspect-video object-cover"
+            />
             <div className="rounded-2xl overflow-hidden border border-zinc-200 mb-4 aspect-video">
               <iframe
                 title="Shop location map"
