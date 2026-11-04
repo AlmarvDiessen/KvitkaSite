@@ -87,7 +87,7 @@ export default function Home() {
 
           <a
             href={PHONE_TEL}
-            className="hidden md:inline-flex items-center gap-2 bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full hover:bg-blue-800 transition-colors"
+            className="hidden md:inline-flex items-center gap-2 bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-full shadow-sm shadow-blue-900/15 hover:bg-blue-800 hover:shadow-md hover:shadow-blue-900/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
           >
             <Phone className="h-4 w-4" />
             {PHONE_DISPLAY}
@@ -95,7 +95,7 @@ export default function Home() {
 
           <button
             onClick={() => setMenuOpen((open) => !open)}
-            className="md:hidden p-2 -mr-2"
+            className="md:hidden p-2 -mr-2 rounded-full text-blue-700 hover:bg-blue-50 active:bg-blue-100 transition-colors"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -145,13 +145,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#booking"
-              className="inline-flex items-center gap-2 bg-white text-blue-700 font-medium px-6 py-3 rounded-full border-2 border-blue-700 hover:bg-yellow-400 hover:text-zinc-900 hover:border-yellow-400 transition-colors"
+              className="inline-flex items-center gap-2 bg-blue-700 text-white font-medium px-6 py-3 rounded-full shadow-sm shadow-blue-900/15 hover:bg-blue-800 hover:shadow-md hover:shadow-blue-900/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
             >
               Book Now
             </a>
             <a
               href="#services"
-              className="inline-flex items-center gap-2 border border-blue-200 text-blue-700 font-medium px-6 py-3 rounded-full hover:border-blue-700 hover:bg-blue-50 transition-colors"
+              className="inline-flex items-center gap-2 border-2 border-blue-200 bg-white text-blue-700 font-medium px-6 py-3 rounded-full hover:border-blue-700 hover:bg-blue-50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
             >
               View Services
             </a>
@@ -295,7 +295,7 @@ export default function Home() {
           <button
             type="submit"
             disabled={bookingStatus === "submitting"}
-            className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-white text-blue-700 font-medium px-6 py-3 rounded-full border-2 border-blue-700 hover:bg-yellow-400 hover:text-zinc-900 hover:border-yellow-400 transition-colors disabled:opacity-50"
+            className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-blue-700 text-white font-medium px-6 py-3 rounded-full shadow-sm shadow-blue-900/15 hover:bg-blue-800 hover:shadow-md hover:shadow-blue-900/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:translate-y-0 disabled:opacity-50 disabled:shadow-none"
           >
             {bookingStatus === "submitting" ? "Sending…" : "Request Booking"}
           </button>
@@ -352,7 +352,7 @@ export default function Home() {
             <p className="text-zinc-600 mb-4">{ADDRESS}</p>
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center gap-2 bg-blue-700 text-white font-medium px-6 py-3 rounded-full hover:bg-blue-800 transition-colors"
+              className="inline-flex items-center gap-2 bg-blue-700 text-white font-medium px-6 py-3 rounded-full shadow-sm shadow-blue-900/15 hover:bg-blue-800 hover:shadow-md hover:shadow-blue-900/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
             >
               <Phone className="h-4 w-4" />
               {PHONE_DISPLAY}
