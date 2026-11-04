@@ -125,13 +125,13 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-100 via-blue-50 to-yellow-50" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/hero-painting.webp"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover object-top opacity-10 pointer-events-none select-none"
+          className="absolute left-0 top-0 h-full w-[42%] md:w-[38%] max-w-md scale-110 object-cover object-top opacity-35 md:opacity-90 pointer-events-none select-none [mask-image:linear-gradient(to_right,black_55%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,black_55%,transparent_100%)]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/80 to-white pointer-events-none" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 md:py-36 text-center">
           <p className="text-yellow-600 font-medium tracking-wide uppercase text-sm mb-4">
