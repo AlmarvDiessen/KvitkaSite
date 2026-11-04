@@ -48,7 +48,7 @@ Builds locally, deploys to Vercel production, and checks the live URL returns 20
 
 ## Starting the next shop
 
-1. Copy this directory: `cp -r harvest-hub <new-shop-name>`
+1. Copy this directory: `cp -r Kvitka <new-shop-name>`
 2. Inside the copy, remove `.vercel/`, `node_modules/`, and `.next/` so it starts as its own fresh project instead of redeploying over this one
 3. Edit `app/content.ts` with the new shop's details
 4. `npm install`
