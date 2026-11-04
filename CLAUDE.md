@@ -10,6 +10,12 @@ A website for **Kvitka Centrum**, a beauty salon (lashes, massage, keratin treat
 - **Vercel project**: `kvitka-centrum-salon` (Vercel team: `aldb`)
 - **Run/deploy/edit instructions**: see `README.md` — this file is status and history, not a how-to.
 
+## Branching workflow
+
+- `main` — stable/production. **Protected**: direct pushes are rejected by a GitHub repository rule; all changes land via a reviewed, merged pull request.
+- `develop` — integration branch, branched from `main`. Feature work merges here first.
+- `feature-<branch-name>` — one branch per piece of work, branched from `develop` (e.g. `feature-real-prices`, `feature-calendar-setup`). Open a PR into `develop` when ready; `develop` gets merged into `main` periodically once it's in a good state.
+
 ## Current status
 
 **Live and working:**
@@ -35,3 +41,4 @@ A website for **Kvitka Centrum**, a beauty salon (lashes, massage, keratin treat
 - **2026-11-03** — Ukrainian redesign (`df9898c`). Fixed a gallery image-stretch bug: grid images were missing `w-full h-full`, so on desktop they rendered at their native (small, Instagram-save-sized) resolution instead of filling their tile — mobile only looked right by coincidence. Re-themed from amber/zinc-900 to a blue/yellow/white palette per the client's request. Added the sunflower painting as a faint, obscured hero background. Replaced the generic sparkle icon ("3 orange stars") with a flower mark cropped out of the shop's own sign photo and recolored to match the theme — used as both the header/footer logo and the site favicon.
 - **2026-11-03** — GitHub + Google Calendar (`def25a9`). Repo pushed to GitHub (`AlmarvDiessen/KvitkaSite`) so collaborators can work on it. Switched booking notifications from Resend email to writing events directly onto a Google Calendar via a service account — client preferred this since they already use Google and it means bookings land straight on a calendar instead of in an inbox.
 - **2026-11-03** — This file added. No prior CLAUDE.md/docs/changelog existed; added so any collaborator or Claude Code session opening this repo gets full context and status automatically, instead of re-deriving it from git history each time.
+- **2026-11-04** — Repo reorganized and branching workflow established. Local project directory renamed from `harvest-hub` to `Kvitka`; raw/unused source photos (including the Google Business listing screenshot) moved into `source-images/` instead of a separate untracked folder. Discovered pushes had been going to a stray `master` branch while GitHub's actual default branch was `main` (one commit behind) — reconciled via PR #1. `main` also turned out to have branch protection requiring PRs. Added a `develop` branch off `main` and adopted a `feature-<branch-name>` → `develop` → `main` workflow (documented above) to reduce merge conflicts now that a second person is working on this repo.
