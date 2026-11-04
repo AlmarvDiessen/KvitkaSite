@@ -10,7 +10,8 @@ import {
   PHONE_DISPLAY,
   PHONE_TEL,
   ADDRESS,
-  SERVICES,
+  SERVICE_CATEGORIES,
+  BOOKING_DEPOSIT_NOTE,
   GALLERY_ITEMS,
   HOURS,
   REVIEWS,
@@ -165,19 +166,25 @@ export default function Home() {
           <h2 className="text-3xl font-semibold tracking-tight mb-3">Services & Pricing</h2>
           <p className="text-zinc-500">Simple, transparent pricing. No surprises.</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERVICES.map((service) => (
-            <div
-              key={service.name}
-              className="border border-zinc-200 rounded-2xl p-6 hover:border-blue-600 transition-colors"
-            >
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="font-semibold text-zinc-900">{service.name}</h3>
-                <span className="font-semibold text-blue-700 whitespace-nowrap ml-4">
-                  {service.price}
-                </span>
-              </div>
-              <p className="text-sm text-zinc-500">{service.duration}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {SERVICE_CATEGORIES.map((group) => (
+            <div key={group.category} className="border border-zinc-200 rounded-2xl p-6">
+              <h3 className="font-semibold text-zinc-900 mb-3">{group.category}</h3>
+              <ul className="divide-y divide-zinc-100">
+                {group.items.map((item) => (
+                  <li key={item.name} className="py-3">
+                    <div className="flex items-start justify-between gap-4">
+                      <span className="text-sm text-zinc-700">{item.name}</span>
+                      <span className="font-semibold text-blue-700 whitespace-nowrap">
+                        {item.price}
+                      </span>
+                    </div>
+                    {item.note && (
+                      <p className="text-xs text-zinc-400 mt-1">{item.note}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -267,10 +274,16 @@ export default function Home() {
             <option value="" disabled>
               Select a service
             </option>
-            {SERVICES.map((service) => (
-              <option key={service.name} value={service.name}>
-                {service.name}
-              </option>
+            {SERVICE_CATEGORIES.map((group) => (
+              <optgroup key={group.category} label={group.category}>
+                {group.items
+                  .filter((item) => item.price !== "On request")
+                  .map((item) => (
+                    <option key={item.name} value={item.name}>
+                      {item.name}
+                    </option>
+                  ))}
+              </optgroup>
             ))}
           </select>
           <input
@@ -308,6 +321,10 @@ export default function Home() {
           {bookingStatus === "error" && (
             <p className="sm:col-span-2 text-sm text-red-600">{bookingError}</p>
           )}
+
+          <p className="sm:col-span-2 text-xs text-zinc-400 text-center">
+            {BOOKING_DEPOSIT_NOTE}
+          </p>
         </form>
       </section>
 
