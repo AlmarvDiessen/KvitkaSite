@@ -16,6 +16,10 @@ A website for **Kvitka Centrum**, a beauty salon (lashes, massage, keratin treat
 - `develop` — integration branch, branched from `main`. Feature work merges here first.
 - `feature-<branch-name>` — one branch per piece of work, branched from `develop` (e.g. `feature-real-prices`, `feature-calendar-setup`). Open a PR into `develop` when ready; `develop` gets merged into `main` periodically once it's in a good state.
 
+### Vercel deployments
+
+Only `develop`/`main` should ever have a lasting deployment — the Vercel dashboard isn't git-integrated, so nothing deploys automatically; every deployment is a deliberate `vercel` CLI run. For feature branches: deploy a **preview** (`vercel`, no `--prod`) to test live, delete it once confirmed good (`vercel remove <url> --yes`), then it's ready to merge into `develop`. Never run `vercel --prod` from a feature branch — only after merging. Production itself only gets redeployed deliberately, not on every merge.
+
 ## Current status
 
 **Live and working:**
@@ -45,3 +49,4 @@ A website for **Kvitka Centrum**, a beauty salon (lashes, massage, keratin treat
 - **2026-11-04** — Real service pricing (`feature-real-pricing`, PR #5). Client supplied 5 photos of their own Instagram price-list post; transcribed directly into `SERVICE_CATEGORIES` in `app/content.ts`, replacing the 6 generic "TBD" placeholders with the real ~35-item menu across 7 categories. Services & Pricing now renders grouped category cards (doesn't scale well as individual item cards at this volume), the booking form's service dropdown uses `<optgroup>`s, and the salon's real €30 deposit / 48-hour cancellation policy is now shown under the booking form.
 - **2026-11-04** — Hero painting redesign (`feature-hero-painting-gradient`). `public/hero-painting.webp` was previously the raw, uncropped source photo (shop window frame, reflections, bricks and all) shown faintly across the whole hero — replaced it with a tight crop of just the artwork itself. The painting now sits as a left-anchored panel that fades into a blue-to-yellow gradient toward the right via a CSS mask, instead of a uniform low-opacity wash. Had to lower its opacity specifically on mobile (`opacity-35 md:opacity-90`) since the full-strength version collided with the centered hero text on narrow screens.
 - **2026-11-04** — Hero painting flipped to the right (`feature-hero-image-right`). Moved the painting panel from the left side to the right and mirrored its fade mask to match, so the gradient's yellow end now sits next to the image and blends with the painted sunflowers instead of the blue end touching them.
+- **2026-11-04** — Vercel cleanup + preview workflow (`feature-vercel-cleanup-workflow`). The project had accumulated 21 historical deployments from repeated manual `vercel --prod` runs across the session — deleted all but the current production one. Documented a going-forward rule (above) to stop this recurring: feature branches get a throwaway preview deployment for live testing, not a production one.
