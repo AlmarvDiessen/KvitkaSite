@@ -68,9 +68,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
+    <div className="min-h-screen bg-cream text-zinc-900">
       {/* Nav */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-zinc-200">
+      <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-black/10">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2 font-semibold text-lg tracking-tight">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -78,7 +78,7 @@ export default function Home() {
             {SHOP_NAME}
           </a>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-700">
             {NAV_LINKS.map((link) => (
               <a key={link.href} href={link.href} className="hover:text-zinc-900 transition-colors">
                 {link.label}
@@ -88,7 +88,7 @@ export default function Home() {
 
           <a
             href={PHONE_TEL}
-            className="hidden md:inline-flex items-center gap-2 bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg shadow-sm shadow-blue-900/15 hover:bg-blue-800 hover:shadow-md hover:shadow-blue-900/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
+            className="hidden md:inline-flex items-center gap-2 bg-brandYellow text-ink text-sm font-semibold px-4 py-2 rounded-lg shadow-sm shadow-black/20 hover:brightness-95 hover:shadow-md hover:shadow-black/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
             <Phone className="h-4 w-4" />
             {PHONE_DISPLAY}
@@ -96,7 +96,7 @@ export default function Home() {
 
           <button
             onClick={() => setMenuOpen((open) => !open)}
-            className="md:hidden p-2 -mr-2 rounded-full text-blue-700 hover:bg-blue-50 active:bg-blue-100 transition-colors"
+            className="md:hidden p-2 -mr-2 rounded-full text-ink hover:bg-black/5 active:bg-black/10 transition-colors"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -104,7 +104,7 @@ export default function Home() {
         </div>
 
         {menuOpen && (
-          <div className="md:hidden border-t border-zinc-200 px-6 py-4 flex flex-col gap-4 text-sm font-medium text-zinc-600">
+          <div className="md:hidden border-t border-black/10 px-6 py-4 flex flex-col gap-4 text-sm font-medium text-zinc-700">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
@@ -125,7 +125,7 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-100 via-blue-50 to-yellow-100" />
+        <div className="absolute inset-0 bg-cream" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/hero-painting.webp"
@@ -134,25 +134,25 @@ export default function Home() {
         />
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-24 md:py-36 text-center">
-          <p className="text-yellow-600 font-medium tracking-wide uppercase text-sm mb-4">
+          <p className="text-ink font-semibold tracking-wide uppercase text-sm mb-4">
             {HERO_EYEBROW}
           </p>
           <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-zinc-900 mb-6">
             {TAGLINE}
           </h1>
-          <p className="text-lg text-zinc-500 max-w-xl mx-auto mb-10">
+          <p className="text-lg text-zinc-700 max-w-xl mx-auto mb-10">
             {HERO_DESCRIPTION}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#booking"
-              className="inline-flex items-center gap-2 bg-blue-700 text-white font-medium px-6 py-3 rounded-lg shadow-sm shadow-blue-900/15 hover:bg-blue-800 hover:shadow-md hover:shadow-blue-900/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 bg-brandYellow text-ink font-semibold px-6 py-3 rounded-lg shadow-sm shadow-black/20 hover:brightness-95 hover:shadow-md hover:shadow-black/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             >
               Book Now
             </a>
             <a
               href="#services"
-              className="inline-flex items-center gap-2 border-2 border-blue-200 bg-white text-blue-700 font-medium px-6 py-3 rounded-lg hover:border-blue-700 hover:bg-blue-50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 bg-brandYellow text-ink font-semibold px-6 py-3 rounded-lg shadow-sm shadow-black/20 hover:brightness-95 hover:shadow-md hover:shadow-black/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             >
               View Services
             </a>
@@ -161,26 +161,26 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section id="services" className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-100">
+      <section id="services" className="max-w-6xl mx-auto px-6 py-20 border-t border-black/10">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-semibold tracking-tight mb-3">Services & Pricing</h2>
-          <p className="text-zinc-500">Simple, transparent pricing. No surprises.</p>
+          <p className="text-zinc-700">Simple, transparent pricing. No surprises.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {SERVICE_CATEGORIES.map((group) => (
-            <div key={group.category} className="border border-zinc-200 rounded-2xl p-6">
-              <h3 className="font-semibold text-zinc-900 mb-3">{group.category}</h3>
-              <ul className="divide-y divide-zinc-100">
+            <div key={group.category} className="bg-primary border-2 border-brandYellow rounded-2xl p-6">
+              <h3 className="font-semibold text-ink mb-3">{group.category}</h3>
+              <ul className="divide-y divide-black/10">
                 {group.items.map((item) => (
                   <li key={item.name} className="py-3">
                     <div className="flex items-start justify-between gap-4">
                       <span className="text-sm text-zinc-700">{item.name}</span>
-                      <span className="font-semibold text-blue-700 whitespace-nowrap">
+                      <span className="font-semibold text-black whitespace-nowrap">
                         {item.price}
                       </span>
                     </div>
                     {item.note && (
-                      <p className="text-xs text-zinc-400 mt-1">{item.note}</p>
+                      <p className="text-xs text-zinc-600 mt-1">{item.note}</p>
                     )}
                   </li>
                 ))}
@@ -191,10 +191,10 @@ export default function Home() {
       </section>
 
       {/* Gallery */}
-      <section id="gallery" className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-100">
+      <section id="gallery" className="max-w-6xl mx-auto px-6 py-20 border-t border-black/10">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-semibold tracking-tight mb-3">Gallery</h2>
-          <p className="text-zinc-500">A look at the work.</p>
+          <p className="text-zinc-700">A look at the work.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {GALLERY_ITEMS.map((item, i) =>
@@ -210,17 +210,13 @@ export default function Home() {
               <div
                 key={item.alt}
                 className={`aspect-square rounded-2xl flex flex-col items-center justify-center gap-3 ${
-                  i % 2 === 0 ? "bg-blue-50" : "bg-blue-700"
+                  i % 2 === 0 ? "bg-cream" : "bg-primary"
                 }`}
               >
                 <Sparkles
-                  className={`h-8 w-8 ${i % 2 === 0 ? "text-blue-700" : "text-yellow-400"}`}
+                  className={`h-8 w-8 ${i % 2 === 0 ? "text-ink" : "text-brandYellow"}`}
                 />
-                <span
-                  className={`text-sm font-medium ${i % 2 === 0 ? "text-blue-700" : "text-blue-100"}`}
-                >
-                  {item.alt}
-                </span>
+                <span className="text-sm font-medium text-ink">{item.alt}</span>
               </div>
             )
           )}
@@ -229,17 +225,17 @@ export default function Home() {
 
       {/* Reviews */}
       {REVIEWS.length > 0 && (
-        <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-100">
+        <section className="max-w-6xl mx-auto px-6 py-20 border-t border-black/10">
           <div className="flex flex-col md:flex-row gap-8 justify-center text-center md:text-left">
             {REVIEWS.map((review) => (
               <div key={review.quote} className="flex-1 max-w-sm mx-auto md:mx-0">
                 <div className="flex gap-1 mb-3 justify-center md:justify-start">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="h-4 w-4 fill-brandYellow text-brandYellow" />
                   ))}
                 </div>
-                <p className="text-zinc-600 mb-2">&ldquo;{review.quote}&rdquo;</p>
-                <p className="text-sm text-zinc-400">{review.name}</p>
+                <p className="text-zinc-700 mb-2">&ldquo;{review.quote}&rdquo;</p>
+                <p className="text-sm text-zinc-600">{review.name}</p>
               </div>
             ))}
           </div>
@@ -247,29 +243,29 @@ export default function Home() {
       )}
 
       {/* Booking */}
-      <section id="booking" className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-100">
+      <section id="booking" className="max-w-6xl mx-auto px-6 py-20 border-t border-black/10">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-semibold tracking-tight mb-3">Book an Appointment</h2>
-          <p className="text-zinc-500">Pick a service and a time that works for you.</p>
+          <p className="text-zinc-700">Pick a service and a time that works for you.</p>
         </div>
         <form onSubmit={handleBookingSubmit} className="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             name="name"
             required
             placeholder="Your name"
-            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
           />
           <input
             name="contact"
             required
             placeholder="Phone or email"
-            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
           />
           <select
             name="service"
             required
             defaultValue=""
-            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
           >
             <option value="" disabled>
               Select a service
@@ -290,25 +286,25 @@ export default function Home() {
             type="date"
             name="date"
             required
-            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
+            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
           />
           <input
             type="time"
             name="time"
             required
-            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
+            className="border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
           />
           <textarea
             name="notes"
             placeholder="Anything else we should know? (optional)"
             rows={3}
-            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-600"
+            className="sm:col-span-2 border border-zinc-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"
           />
 
           <button
             type="submit"
             disabled={bookingStatus === "submitting"}
-            className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-blue-700 text-white font-medium px-6 py-3 rounded-lg shadow-sm shadow-blue-900/15 hover:bg-blue-800 hover:shadow-md hover:shadow-blue-900/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 disabled:translate-y-0 disabled:opacity-50 disabled:shadow-none"
+            className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-brandYellow text-ink font-semibold px-6 py-3 rounded-lg shadow-sm shadow-black/20 hover:brightness-95 hover:shadow-md hover:shadow-black/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:translate-y-0 disabled:opacity-50 disabled:shadow-none"
           >
             {bookingStatus === "submitting" ? "Sending…" : "Request Booking"}
           </button>
@@ -322,24 +318,24 @@ export default function Home() {
             <p className="sm:col-span-2 text-sm text-red-600">{bookingError}</p>
           )}
 
-          <p className="sm:col-span-2 text-xs text-zinc-400 text-center">
+          <p className="sm:col-span-2 text-xs text-zinc-600 text-center">
             {BOOKING_DEPOSIT_NOTE}
           </p>
         </form>
       </section>
 
       {/* Hours & Location */}
-      <section id="hours" className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-100">
+      <section id="hours" className="max-w-6xl mx-auto px-6 py-20 border-t border-black/10">
         <div className="grid md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight mb-6 flex items-center gap-3">
-              <Clock className="h-6 w-6 text-blue-700" />
+              <Clock className="h-6 w-6 text-ink" />
               Opening Hours
             </h2>
-            <ul className="divide-y divide-zinc-100">
+            <ul className="divide-y divide-black/10">
               {HOURS.map((h) => (
                 <li key={h.day} className="flex justify-between py-3 text-sm">
-                  <span className="text-zinc-600">{h.day}</span>
+                  <span className="text-zinc-700">{h.day}</span>
                   <span className="font-medium text-zinc-900">{h.time}</span>
                 </li>
               ))}
@@ -348,7 +344,7 @@ export default function Home() {
 
           <div id="contact">
             <h2 className="text-3xl font-semibold tracking-tight mb-6 flex items-center gap-3">
-              <MapPin className="h-6 w-6 text-blue-700" />
+              <MapPin className="h-6 w-6 text-ink" />
               Find Us
             </h2>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -357,7 +353,7 @@ export default function Home() {
               alt="Kvitka Centrum storefront"
               className="rounded-2xl mb-4 w-full aspect-video object-cover"
             />
-            <div className="rounded-2xl overflow-hidden border border-zinc-200 mb-4 aspect-video">
+            <div className="rounded-2xl overflow-hidden border border-black/15 mb-4 aspect-video">
               <iframe
                 title="Shop location map"
                 className="w-full h-full"
@@ -366,10 +362,10 @@ export default function Home() {
                 src={`https://www.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`}
               />
             </div>
-            <p className="text-zinc-600 mb-4">{ADDRESS}</p>
+            <p className="text-zinc-700 mb-4">{ADDRESS}</p>
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center gap-2 bg-blue-700 text-white font-medium px-6 py-3 rounded-lg shadow-sm shadow-blue-900/15 hover:bg-blue-800 hover:shadow-md hover:shadow-blue-900/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 bg-brandYellow text-ink font-semibold px-6 py-3 rounded-lg shadow-sm shadow-black/20 hover:brightness-95 hover:shadow-md hover:shadow-black/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             >
               <Phone className="h-4 w-4" />
               {PHONE_DISPLAY}
@@ -379,8 +375,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-100">
-        <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+      <footer className="border-t border-black/10">
+        <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-600">
           <div className="flex items-center gap-2 font-medium text-zinc-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/flower-mark.png" alt="" className="h-6 w-6 shrink-0" />

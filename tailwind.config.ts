@@ -8,7 +8,12 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        primary: "#7CCFF2",
+        cream: "#F7F3EA",
+        brandYellow: "#FFF917",
+        ink: "#0E006D",
+      },
     },
   },
   plugins: [],
