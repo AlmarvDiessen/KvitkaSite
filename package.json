@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "bash deploy.sh"
+    "deploy": "bash deploy.sh",
+    "test:calendar": "node verify-calendar-booking.mjs"
   },
   "dependencies": {
     "google-auth-library": "^11.3.2",
