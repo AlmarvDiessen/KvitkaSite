@@ -29,6 +29,16 @@ Without these set, the form still works but bookings are only logged server-side
 4. On the Google account whose calendar should receive bookings, open Google Calendar → Settings → pick the calendar → **Share with specific people** → add the service account's email with **"Make changes to events"** permission.
 5. `GOOGLE_CALENDAR_ID` is that calendar's address, found under Settings → "Integrate calendar" (for a primary calendar, it's just the Google account's email address).
 
+### Verifying it works
+
+```bash
+npm run test:calendar
+```
+
+Submits a real test booking to `/api/book`, confirms the event actually landed on the calendar via the Calendar API, then deletes it again. Needs `.env.local` set up per above — targets `http://localhost:3000` by default (run `npm run dev` in another terminal first), or point it elsewhere with `TEST_URL=https://your-deployment.vercel.app npm run test:calendar`.
+
+This is an integration test, not a unit test — it makes real network calls and needs real credentials, so it's not wired into any CI. Run it manually after setup, after rotating the service account key, or whenever you want to confirm the calendar integration specifically still works.
+
 ## Local development
 
 ```bash
